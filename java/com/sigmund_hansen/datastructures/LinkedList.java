@@ -124,6 +124,23 @@ public class LinkedList<E> implements List<E> {
         return true;
     }
 
+    /**
+     * Gets the element at the specified position.
+     *
+     * This method has to traverse the list,
+     * and therefore has linear time complexity.
+     *
+     * It will traverse from the back of the list,
+     * if the index is closer to the end.
+     *
+     * This should yield an average access time of n/4,
+     * where n is the size of the list.
+     *
+     * @param index The index of the element to retrieve.
+     * @throws IndexOutOfBoundsException if the index is negative
+     *         or higher than the size of the list.
+     * @return The element at the specified index.
+     */
     public E get(int index) {
         throw new UnsupportedOperationException("Coming soon to a data structure near you!");
     }
