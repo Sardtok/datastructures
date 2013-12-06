@@ -25,23 +25,73 @@ import java.util.ListIterator;
 
 /**
  * A generic doubly linked list.
- *
- * Released under the GPL
  */
 public class LinkedList<E> implements List<E> {
 
+    /**
+     * A node in the list.
+     */
     private class Node {
-        private final E element;
-        Node next, previous;
 
+        /** The element pointed to by this node. */
+        private final E element;
+
+        /** Next node in the  list. */
+        Node next;
+
+        /** Previous node in the list. */
+        Node previous;
+
+        /**
+         * Creates a new Node
+         * without setting its next and previous pointers.
+         *
+         * @param element The element contained in this node.
+         */
         public Node(E element) {
             this.element = element;
         }
+
+        /**
+         * Creates a new Node and sets its next and previous pointers.
+         *
+         * @param element The element contained in this node.
+         * @param next The next node in the list.
+         * @param previous The previous node in the list.
+         */
+        public Node(E element, Node next, Node previous) {
+            this(element);
+            this.next = next;
+            this.previous = previous;
+
+            if (next != null) {
+                next.previous = this;
+            }
+
+            if (previous != null) {
+                previous.next = this;
+            }
+        }
     }
 
-    private Node first, last;
+    /** The first element in the list. */
+    private Node first;
+
+    /** The last element in the list.*/
+    private Node last;
+
+    /** The number of elements in the list. */
     private int size;
 
+    /**
+     * Searches the list for an object and returns whether it exists.
+     *
+     * This method uses a simple linear search,
+     * and therefore has linear time complexity.
+     *
+     * @param o The object to search for.
+     * @return <code>true</code> if the object exists in the list.
+     */
     public boolean contains(Object o) {
         for (E e : this) {
             if (e.equals(o)) {
@@ -52,6 +102,18 @@ public class LinkedList<E> implements List<E> {
         return false;
     }
 
+    /**
+     * Searches the list for every element in a collection
+     * and returns whether all of them exist.
+     *
+     * This method uses a linear search for every element,
+     * and therefore has quadratic time complexity,
+     * or more specifically O(m * n) where m is the size of the collection
+     * and n is the size of this list.
+     *
+     * @param c The collection whose elements are to be searched for.
+     * @return <code>true</code> if all of the elements exist in the list.
+     */
     public boolean containsAll(Collection<?> c) {
         for (Object o : c) {
             if (!contains(o)) {
