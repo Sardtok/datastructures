@@ -209,66 +209,181 @@ public class LinkedList<E> implements List<E> {
         throw new UnsupportedOperationException("Coming soon to a data structure near you!");
     }
 
+    /**
+     * Appends all elements of the given collection to this list.
+     *
+     * @param c The collection whose elements should be added to the list.
+     */
     public boolean addAll(Collection<? extends E> c) {
         throw new UnsupportedOperationException("Coming soon to a data structure near you!");
     }
 
+    /**
+     * Inserts all elements from the given collection at the specified
+     * position.
+     *
+     * @param index The index at which to insert the collection's elements.
+     * @param c The collection whose elements should be addd to the list.
+     */
     public boolean addAll(int index, Collection<? extends E> c) {
         throw new UnsupportedOperationException("Coming soon to a data structure near you!");
     }
 
+    /**
+     * Exchanges the element at the specified position for the passed
+     * element.
+     *
+     * @param index The index of the element to switch out.
+     * @param e The element to insert.
+     * @throws IndexOutOfBoundsException if the index is negative
+     *         or higher than or equal to the size of the list.
+     * @return The element previously located at that position.
+     */
     public E set(int index, E e) {
         throw new UnsupportedOperationException("Coming soon to a data structure near you!");
     }
 
+    /**
+     * Removes all elements from the list.
+     */
     public void clear() {
         throw new UnsupportedOperationException("Coming soon to a data structure near you!");
     }
 
+    /**
+     * Removes the element at the specified position
+     *
+     * @param index The index of the element to remove.
+     * @throws IndexOutOfBoundsException if the index is negative
+     *         or higher than or equal to the size of the list.
+     * @return The element that was removed.
+     */
     public E remove(int index) {
         throw new UnsupportedOperationException("Coming soon to a data structure near you!");
     }
 
+    /**
+     * Removes the first occurrence of the specified object from the
+     * list.
+     *
+     * @param o The object to remove from the list.
+     * @return <code>true</code> if the list changed due to the
+     *         operation (i.e. the element was found and removed).
+     */
     public boolean remove(Object o) {
         throw new UnsupportedOperationException("Coming soon to a data structure near you!");
     }
 
+    /**
+     * Removes all the elements from the given collection from this list.
+     *
+     * @param c The collection whose elements should be removed from
+     *          this list.
+     * @return <code>true</code> if the list changed due to the
+     *         operaton (i.e. any element was removed).
+     */
     public boolean removeAll(Collection<?> c) {
         throw new UnsupportedOperationException("Coming soon to a data structure near you!");
     }
 
+    /**
+     * Removes all elements in this list that are not contained in the
+     * given collection.
+     *
+     * @param c The collection whose elements are to be kept in this list.
+     * @return <code>true</code> if the list changed due to the
+     *         operation (i.e. any element was removed).
+     */
     public boolean retainAll(Collection<?> c) {
         throw new UnsupportedOperationException("Coming soon to a data structure near you!");
     }
 
+    /**
+     * Gets the first index of the given object.
+     *
+     * @param o The object to look up.
+     * @return The first index of the object or -1 if the list does
+     *         not contain the item.
+     */
     public int indexOf(Object o) {
         throw new UnsupportedOperationException("Coming soon to a data structure near you!");
     }
 
+    /**
+     * Gets the last index of the given object.
+     *
+     * @param o The object to look up.
+     * @return The last index of the object or -1 if the list does not
+     *         contain the item.
+     */
     public int lastIndexOf(Object o) {
         throw new UnsupportedOperationException("Coming soon to a data structure near you!");
     }
 
+    /**
+     * Gets a view of part of this list.
+     *
+     * @param from The index of the first element to include.
+     * @param to The index directly following the returned view.
+     * @throws IndexOutOfBoundsException if the starting index is
+     *         negative, the ending index is larger than the size of
+     *         the list or the starting index is higher than the
+     *         ending index.
+     * @return A view of a subset of this list.
+     */
     public List<E> subList(int from, int to) {
         throw new UnsupportedOperationException("Coming soon to a data structure near you!");
     }
 
+    /**
+     * Gets an array containing the items of this list.
+     *
+     * @return An array containing this list's items.
+     */
     public Object[] toArray() {
         throw new UnsupportedOperationException("Coming soon to a data structure near you!");
     }
 
+    /**
+     * Fills the specified array with the items from this list if the
+     * items will fit, or a new array of the same type.
+     *
+     * @param a The array to fill with this list's items.
+     * @return The array that was passed, if it's big enough, or a new
+     *         array of the same type.
+     */
     public <T> T[] toArray(T[] a) {
         throw new UnsupportedOperationException("Coming soon to a data structure near you!");
     }
 
+    /**
+     * Gets an iterator which will iterate over the elements of the list
+     * from first to last.
+     * 
+     * @return An iterator iterating from start to finish.
+     */
     public Iterator<E> iterator() {
         return listIterator(0);
     }
 
+    /**
+     * Gets a list iterator allowing forwards and backwards traversal,
+     * starting at the first element.
+     *
+     * @return A list iterator starting at the first element.
+     */
     public ListIterator<E> listIterator() {
         return listIterator(0);
     }
 
+    /**
+     * Gets a list iterator allowing forwards and backwards traversal,
+     * starting at the specified position.
+     *
+     * @param startIndex The index of the first element to return upon
+     *                   calling next.
+     * @return A list iterator starting at the specified position.
+     */
     public ListIterator<E> listIterator(int startIndex) {
         throw new UnsupportedOperationException("Coming soon to a data structure near you!");
     }
