@@ -403,8 +403,46 @@ public class LinkedList<E> implements List<E> {
      *                   calling next.
      * @return A list iterator starting at the specified position.
      */
-    public ListIterator<E> listIterator(int startIndex) {
-        throw new UnsupportedOperationException("Coming soon to a data structure near you!");
+    public ListIterator<E> listIterator(final int startIndex) {
+        return new ListIterator<E>() {
+            NodeIterator it = new NodeIterator(startIndex);
+
+            public boolean hasNext() {
+                return it.hasNext();
+            }
+            
+            public boolean hasPrevious() {
+                return it.hasPrevious();
+            }
+            
+            public int nextIndex() {
+                return it.nextIndex();
+            }
+            
+            public int previousIndex() {
+                return it.previousIndex();
+            }
+
+            public E next() {
+                return it.next().element;
+            }
+            
+            public E previous() {
+                return it.previous().element;
+            }
+            
+            public void remove() {
+                it.remove();
+            }
+            
+            public void set(E e) {
+                it.set(new Node(e));
+            }
+            
+            public void add(E e) {
+                it.add(new Node(e));
+            }
+        };
     }
 
     private class NodeIterator implements ListIterator<Node> {
@@ -415,7 +453,7 @@ public class LinkedList<E> implements List<E> {
         NodeIterator(int index) {
             int i = 0;
 
-            if (index < 0 || index >= size) {
+            if (index < 0 || (index > 0 && index >= size)) {
                 throw new IndexOutOfBoundsException();
             }
 
