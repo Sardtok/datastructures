@@ -26,6 +26,8 @@ import java.util.NoSuchElementException;
 
 /**
  * A generic doubly linked list.
+ * 
+ * @author Sigmund Hansen
  */
 public class LinkedList<E> implements List<E> {
 
@@ -220,6 +222,12 @@ public class LinkedList<E> implements List<E> {
         }
         
         last = new Node(e, null, last);
+        size++;
+        
+        if (first == null) {
+            first = last;
+        }
+        return true;
     }
 
     /**
@@ -465,14 +473,15 @@ public class LinkedList<E> implements List<E> {
 
             if (index < size / 2) {
                 current = first;
-                while (i != index) {
+                while (i < index) {
                     current = current.next;
                     i++;
                 }
 
             } else {
+                current = last;
                 i = size - 1;
-                while (i != index) {
+                while (i > index) {
                     current = current.previous;
                     i--;
                 }
