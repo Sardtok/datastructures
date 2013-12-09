@@ -460,9 +460,11 @@ public class LinkedList<E> implements List<E> {
     }
 
     private class NodeIterator implements ListIterator<Node> {
+        private Node next;
         private Node current;
         private Node previous;
-        private int index;
+        private int nextIndex;
+        private int prevIndex;
 
         NodeIterator(int index) {
             int i = 0;
@@ -472,38 +474,42 @@ public class LinkedList<E> implements List<E> {
             }
 
             if (index < size / 2) {
-                current = first;
+                next = first;
                 while (i < index) {
-                    current = current.next;
+                    next = next.next;
                     i++;
                 }
 
             } else {
-                current = last;
+                next = last;
                 i = size - 1;
                 while (i > index) {
-                    current = current.previous;
+                    next = next.previous;
                     i--;
                 }
             }
 
-            this.index = index;
+            if (next != null) {
+                previous = next.previous;
+            }
+            this.nextIndex = index;
+            this.prevIndex = index - 1;
         }
 
         public boolean hasNext() {
-            return index < size;
+            return nextIndex < size;
         }
 
         public boolean hasPrevious() {
-            return index > 0;
+            return prevIndex >= 0 && size > 0;
         }
 
         public int nextIndex() {
-            return index;
+            return nextIndex;
         }
 
         public int previousIndex() {
-            return index - 1;
+            return prevIndex;
         }
 
         public Node next() {
@@ -511,10 +517,11 @@ public class LinkedList<E> implements List<E> {
                 throw new NoSuchElementException();
             }
 
-            index++;
+            nextIndex++;
+            current = next;
+            next = next.next;
             previous = current;
-            current = current.next;
-            return previous;
+            return current;
         }
 
         public Node previous() {
@@ -522,34 +529,41 @@ public class LinkedList<E> implements List<E> {
                 throw new NoSuchElementException();
             }
             
-            index--;
-            previous = current = current.previous;
-            return previous;
+            nextIndex--;
+            current = previous;
+            previous = previous.previous;
+            next = current;
+            return current;
         }
 
         public void remove() {
-            if (previous == null) {
+            if (current == null) {
                 throw new IllegalStateException();
             }
             
-            previous.remove();
-            index -= current != previous ? 1 : 0;
-            previous = null;
+            current.remove();
+            if (current == next) {
+                next = next.next;
+            } else {
+                nextIndex--;
+            }
+            
+            if (current == previous) {
+                previous = previous.previous;
+                prevIndex--;
+            }
+            current = null;
         }
 
         public void set(Node n) {
-            if (previous == null) {
+            if (current == null) {
                 throw new IllegalStateException();
             }
 
-            n.previous = previous.previous;
-            n.next = previous.next;
-
-            if (current == previous) {
-                current = n;
-            }
-
-            previous = n;
+            n.previous = previous;
+            n.next = next;
+            
+            current = n;
         }
         
         public void add(Node n) {
