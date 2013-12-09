@@ -185,7 +185,9 @@ public class LinkedList<E> implements List<E> {
      * @return The element at the specified index.
      */
     private Node getNode(int index) {
-        throw new UnsupportedOperationException("Coming soon to a data structure near you!");        
+        NodeIterator it = new NodeIterator(index);
+
+        return it.next();
     }
 
     /**
@@ -213,7 +215,11 @@ public class LinkedList<E> implements List<E> {
      * @return <code>true</code> if the element was added (i.e. always).
      */
     public boolean add(E e) {
-        throw new UnsupportedOperationException("Coming soon to a data structure near you!");
+        if (e == null) {
+            throw new NullPointerException("Null elements are not supported.");
+        }
+        
+        last = new Node(e, null, last);
     }
 
     /**
