@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
 /**
  * A generic doubly linked list.
@@ -70,6 +71,24 @@ public class LinkedList<E> implements List<E> {
 
             if (previous != null) {
                 previous.next = this;
+            }
+        }
+
+        public void remove() {
+            if (previous != null) {
+                previous.next = next;
+            }
+
+            if (next != null) {
+                next.previous = previous;
+            }
+            
+            if (this == first) {
+                first = next;
+            }
+
+            if (this == last) {
+                last = previous;
             }
         }
     }
@@ -386,5 +405,102 @@ public class LinkedList<E> implements List<E> {
      */
     public ListIterator<E> listIterator(int startIndex) {
         throw new UnsupportedOperationException("Coming soon to a data structure near you!");
+    }
+
+    private class NodeIterator implements ListIterator<Node> {
+        private Node current;
+        private Node previous;
+        private int index;
+
+        NodeIterator(int index) {
+            int i = 0;
+
+            if (index < 0 || index >= size) {
+                throw new IndexOutOfBoundsException();
+            }
+
+            if (index < size / 2) {
+                current = first;
+                while (i != index) {
+                    current = current.next;
+                    i++;
+                }
+
+            } else {
+                i = size - 1;
+                while (i != index) {
+                    current = current.previous;
+                    i--;
+                }
+            }
+
+            this.index = index;
+        }
+
+        public boolean hasNext() {
+            return index < size;
+        }
+
+        public boolean hasPrevious() {
+            return index > 0;
+        }
+
+        public int nextIndex() {
+            return index;
+        }
+
+        public int previousIndex() {
+            return index - 1;
+        }
+
+        public Node next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+
+            index++;
+            previous = current;
+            current = current.next;
+            return previous;
+        }
+
+        public Node previous() {
+            if (!hasPrevious()) {
+                throw new NoSuchElementException();
+            }
+            
+            index--;
+            previous = current = current.previous;
+            return previous;
+        }
+
+        public void remove() {
+            if (previous == null) {
+                throw new IllegalStateException();
+            }
+            
+            previous.remove();
+            index -= current != previous ? 1 : 0;
+            previous = null;
+        }
+
+        public void set(Node n) {
+            if (previous == null) {
+                throw new IllegalStateException();
+            }
+
+            n.previous = previous.previous;
+            n.next = previous.next;
+
+            if (current == previous) {
+                current = n;
+            }
+
+            previous = n;
+        }
+        
+        public void add(Node n) {
+            throw new UnsupportedOperationException("Coming to a data structure near you, with much more book-keeping pointers.");
+        }
     }
 }
