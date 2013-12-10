@@ -167,13 +167,22 @@ public class LinkedListTest {
     @Test
     public void testAdd() {
         System.out.println("add");
-        Object e = null;
-        LinkedList instance = new LinkedList();
-        boolean expResult = false;
-        boolean result = instance.add(e);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        LinkedList<Integer> instance = new LinkedList<>();
+        for (int i = 0; i < 10; i++) {
+            assertTrue("Adding an element should return true.", instance.add(i));
+            assertEquals("Size should be equal to the number of items added.",
+                         i + 1, instance.size());
+            assertTrue("Elements that are added, should be found in the list.",
+                       instance.contains(i));
+            assertEquals("The last item in the list should be the previously added item.",
+                         Integer.valueOf(i), instance.get(i));
+        }
+        
+        try {
+            instance.add(null);
+            fail("Null elements should not be allowed to be added.");
+        } catch (NullPointerException npe) {}
+        
     }
 
     /**
