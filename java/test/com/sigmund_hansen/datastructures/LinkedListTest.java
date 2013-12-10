@@ -191,12 +191,16 @@ public class LinkedListTest {
     @Test
     public void testAddIndexed() {
         System.out.println("add indexed");
-        int index = 0;
-        Object e = null;
-        LinkedList instance = new LinkedList();
-        instance.add(index, e);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        LinkedList<Integer> instance = new LinkedList<>();
+        for (int i = 0; i < 5; i++) {
+            instance.add(i + 5);
+        }
+        
+        for (int i = 0; i < 5; i++) {
+            assertEquals(Integer.valueOf(5), instance.get(i));
+            instance.add(i, i);
+            assertEquals(Integer.valueOf(i), instance.get(i));
+        }
     }
 
     /**
