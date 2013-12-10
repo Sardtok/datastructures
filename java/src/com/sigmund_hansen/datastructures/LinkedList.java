@@ -294,7 +294,10 @@ public class LinkedList<E> implements List<E> {
      * @return The element that was removed.
      */
     public E remove(int index) {
-        throw new UnsupportedOperationException("Coming soon to a data structure near you!");
+        Iterator<E> it = listIterator(index);
+        E ret = it.next();
+        it.remove();
+        return ret;
     }
 
     /**
@@ -349,7 +352,16 @@ public class LinkedList<E> implements List<E> {
      *         not contain the item.
      */
     public int indexOf(Object o) {
-        throw new UnsupportedOperationException("Coming soon to a data structure near you!");
+        int i = 0;
+        for (E e : this) {
+            if (o.equals(e)) {
+                return i;
+            }
+            
+            i++;
+        }
+        
+        return -1;
     }
 
     /**
