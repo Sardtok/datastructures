@@ -78,13 +78,20 @@ public class LinkedListTest {
     @Test
     public void testContainsAll() {
         System.out.println("containsAll");
-        Collection<?> c = null;
-        LinkedList instance = new LinkedList();
-        boolean expResult = false;
-        boolean result = instance.containsAll(c);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Collection<Integer> c = new ArrayList<>();
+        LinkedList<Integer> instance = new LinkedList<>();
+        for (int i = 0; i < 10; i++) {
+            instance.add(i);
+            c.add(i * 2);
+        }
+        assertFalse("Contains all should not return true, when only half the elements are in the list.",
+                    instance.containsAll(c));
+
+        for (int i = 10; i < 20; i++) {
+            instance.add(i);
+        }
+        assertTrue("Contains all should return true, when all elements are in the list.",
+                   instance.containsAll(c));
     }
 
     /**
@@ -102,16 +109,18 @@ public class LinkedListTest {
             assertEquals("Elements should be indexed in the order they are added.",
                          i, instance.get(i).intValue());
         }
-        
+
         try {
             instance.get(-1);
             fail("Get should throw IndexOutOfBoundsException on negative indices.");
-        } catch (IndexOutOfBoundsException ioe) { }
-        
+        } catch (IndexOutOfBoundsException ioe) {
+        }
+
         try {
             instance.get(instance.size());
             fail("Get should throw IndexOutOfBoundsException on indices >= size.");
-        } catch (IndexOutOfBoundsException ioe) { }
+        } catch (IndexOutOfBoundsException ioe) {
+        }
     }
 
     /**
@@ -123,13 +132,13 @@ public class LinkedListTest {
         LinkedList<Integer> instance = new LinkedList<>();
         assertEquals("Empty lists should have size 0.",
                      0, instance.size());
-        
+
         for (int i = 0; i < 5; i++) {
             instance.add(i);
         }
         assertEquals("Size should reflect number of added elements.",
                      5, instance.size());
-        
+
         for (int i = 0; i < 5; i++) {
             instance.add(i);
         }
@@ -143,19 +152,20 @@ public class LinkedListTest {
     @Test
     public void testIsEmpty() {
         System.out.println("isEmpty");
-        LinkedList instance = new LinkedList();
-        boolean expResult = false;
-        boolean result = instance.isEmpty();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        LinkedList<Integer> instance = new LinkedList<>();
+        assertTrue("isEmpty should return true for an empty list.",
+                   instance.isEmpty());
+
+        instance.add(1);
+        assertFalse("isEmpty should return false for a non-empty list.",
+                    instance.isEmpty());
     }
 
     /**
      * Test of add method, of class LinkedList.
      */
     @Test
-    public void testAdd_GenericType() {
+    public void testAdd() {
         System.out.println("add");
         Object e = null;
         LinkedList instance = new LinkedList();
@@ -170,8 +180,8 @@ public class LinkedListTest {
      * Test of add method, of class LinkedList.
      */
     @Test
-    public void testAdd_int_GenericType() {
-        System.out.println("add");
+    public void testAddIndexed() {
+        System.out.println("add indexed");
         int index = 0;
         Object e = null;
         LinkedList instance = new LinkedList();
@@ -184,7 +194,7 @@ public class LinkedListTest {
      * Test of addAll method, of class LinkedList.
      */
     @Test
-    public void testAddAll_Collection() {
+    public void testAddAll() {
         System.out.println("addAll");
         Collection<Integer> c = new ArrayList<>();
         LinkedList<Integer> instance = new LinkedList<>();
@@ -199,7 +209,7 @@ public class LinkedListTest {
      * Test of addAll method, of class LinkedList.
      */
     @Test
-    public void testAddAllIndexedCollection() {
+    public void testAddAllIndexed() {
         System.out.println("addAll");
         int index = 0;
         Collection<Integer> c = new ArrayList<>();
@@ -243,30 +253,47 @@ public class LinkedListTest {
      * Test of remove method, of class LinkedList.
      */
     @Test
-    public void testRemove_int() {
+    public void testRemoveIndexed() {
         System.out.println("remove");
-        int index = 0;
-        LinkedList instance = new LinkedList();
-        Object expResult = null;
-        Object result = instance.remove(index);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        LinkedList<Float> instance = new LinkedList<>();
+        for (float i = 0f; i < 10f; i++) {
+            instance.add(i);
+        }
+
+        int sizeBefore = instance.size();
+        assertTrue("3f should be in the list",
+                   instance.contains(3f));
+        assertEquals("Index of 4f should be 4 before removing 3f.",
+                     4, instance.indexOf(4f));
+        instance.remove(3);
+        assertEquals("The size of a list should change after removing an object",
+                     sizeBefore - 1, instance.size());
+        assertFalse("An object should not exist in a list after removal.",
+                    instance.contains(3.0f));
+        assertEquals("The index of 4f should be 3 after removing the third item.",
+                     3, instance.indexOf(4f));
     }
 
     /**
      * Test of remove method, of class LinkedList.
      */
     @Test
-    public void testRemove_Object() {
+    public void testRemoveObject() {
         System.out.println("remove");
-        Object o = null;
-        LinkedList instance = new LinkedList();
-        boolean expResult = false;
-        boolean result = instance.remove(o);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        LinkedList<Float> instance = new LinkedList<>();
+        for (float i = 0.0f; i < 10f; i++) {
+            instance.add(i);
+        }
+
+        int sizeBefore = instance.size();
+        assertTrue("Removing an object that exists in a list, should result in a change.",
+                   instance.remove(3.0f));
+        assertFalse("Removing the same object twice, should not result in a change.",
+                    instance.remove(3.0f));
+        assertEquals("The size of a list should change after removing an object",
+                     sizeBefore - 1, instance.size());
+        assertFalse("An object should not exist in a list after removal.",
+                    instance.contains(3.0f));
     }
 
     /**
