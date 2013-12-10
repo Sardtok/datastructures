@@ -92,6 +92,8 @@ public class LinkedList<E> implements List<E> {
             if (this == last) {
                 last = previous;
             }
+            
+            size--;
         }
     }
 
@@ -304,7 +306,15 @@ public class LinkedList<E> implements List<E> {
      *         operation (i.e. the element was found and removed).
      */
     public boolean remove(Object o) {
-        throw new UnsupportedOperationException("Coming soon to a data structure near you!");
+        Iterator<E> it = iterator();
+        while (it.hasNext()) {
+            if (o.equals(it.next())) {
+                it.remove();
+                return true;
+            }
+        }
+        
+        return false;
     }
 
     /**
@@ -517,6 +527,7 @@ public class LinkedList<E> implements List<E> {
                 throw new NoSuchElementException();
             }
 
+            prevIndex++;
             nextIndex++;
             current = next;
             next = next.next;
@@ -529,6 +540,7 @@ public class LinkedList<E> implements List<E> {
                 throw new NoSuchElementException();
             }
             
+            prevIndex--;
             nextIndex--;
             current = previous;
             previous = previous.previous;
