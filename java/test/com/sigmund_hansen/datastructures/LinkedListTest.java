@@ -197,9 +197,13 @@ public class LinkedListTest {
         }
         
         for (int i = 0; i < 5; i++) {
-            assertEquals(Integer.valueOf(5), instance.get(i));
+            assertEquals("The position of 5 should move forward in the list as items are added before it.",
+                         Integer.valueOf(5), instance.get(i));
             instance.add(i, i);
-            assertEquals(Integer.valueOf(i), instance.get(i));
+            assertEquals("An item added to a specific index, should be found at that position.",
+                         Integer.valueOf(i), instance.get(i));
+            assertEquals("The size should increase by one every time an item is added.",
+                         i + 5, instance.size());
         }
     }
 
@@ -211,11 +215,15 @@ public class LinkedListTest {
         System.out.println("addAll");
         Collection<Integer> c = new ArrayList<>();
         LinkedList<Integer> instance = new LinkedList<>();
-        boolean expResult = false;
-        boolean result = instance.addAll(c);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        for (int i = 0; i < 10; i++) {
+            c.add(i);
+        }
+        
+        instance.addAll(c);
+        assertEquals("After adding a collection to the list, they should have the same size.",
+                     c.size(), instance.size());
+        assertTrue("The list should contain all items from the collection after adding them.",
+                   instance.containsAll(c));
     }
 
     /**
@@ -240,14 +248,14 @@ public class LinkedListTest {
     @Test
     public void testSet() {
         System.out.println("set");
-        int index = 0;
-        Object e = null;
-        LinkedList instance = new LinkedList();
-        Object expResult = null;
-        Object result = instance.set(index, e);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        LinkedList<Integer> instance = new LinkedList<>();
+        for (int i = 0; i < 5; i++) {
+            instance.add(i);
+            assertEquals("Exchanging an item should return the item previously located at that position",
+                         Integer.valueOf(i), instance.set(i, i + 5));
+            assertEquals("If an element has been exchanged at an index, the new element shoul be located there.",
+                         Integer.valueOf(i + 5), instance.get(i));
+        }
     }
 
     /**
