@@ -241,7 +241,8 @@ public class LinkedList<E> implements List<E> {
      *         or higher than the size of the list.
      */
     public void add(int index, E e) {
-        throw new UnsupportedOperationException("Coming soon to a data structure near you!");
+        ListIterator<E> it = listIterator(index);
+        it.add(e);
     }
 
     /**
@@ -591,7 +592,25 @@ public class LinkedList<E> implements List<E> {
         }
         
         public void add(Node n) {
-            throw new UnsupportedOperationException("Coming to a data structure near you, with much more book-keeping pointers.");
+            n.next = next;
+            n.previous = previous;
+            
+            if (next != null) {
+                next.previous = n;
+            }
+            
+            if (previous != null) {
+                previous.next = n;
+            }
+
+            if (next == first) {
+                first = n;
+            }
+            
+            previous = n;
+            nextIndex++;
+            prevIndex++;
+            size++;
         }
     }
 }
