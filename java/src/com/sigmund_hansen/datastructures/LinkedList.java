@@ -450,7 +450,15 @@ public class LinkedList<E> implements List<E> {
      * @return An array containing this list's items.
      */
     public Object[] toArray() {
-        throw new UnsupportedOperationException("Coming soon to a data structure near you!");
+        Object[] ret = new Object[size];
+        int i = 0;
+        
+        for (E e : this) {
+            ret[i++] = e;
+            System.out.println(e);
+        }
+        
+        return ret;
     }
 
     /**
