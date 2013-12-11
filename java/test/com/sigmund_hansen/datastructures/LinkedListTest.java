@@ -203,7 +203,7 @@ public class LinkedListTest {
             assertEquals("An item added to a specific index, should be found at that position.",
                          Integer.valueOf(i), instance.get(i));
             assertEquals("The size should increase by one every time an item is added.",
-                         i + 5, instance.size());
+                         i + 6, instance.size());
         }
     }
 
