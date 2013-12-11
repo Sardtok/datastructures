@@ -264,10 +264,19 @@ public class LinkedListTest {
     @Test
     public void testClear() {
         System.out.println("clear");
-        LinkedList instance = new LinkedList();
+        LinkedList<Integer> instance = new LinkedList<>();
+        for (int i = 0; i < 5; i++) {
+            instance.add(i);
+        }
+        
+        assertEquals("", 5, instance.size());
         instance.clear();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals("", 0, instance.size());
+        try {
+            instance.get(0);
+            fail("There should not be a first item in the list after clearing it.");
+        } catch (IndexOutOfBoundsException ioobe) {
+        }
     }
 
     /**
