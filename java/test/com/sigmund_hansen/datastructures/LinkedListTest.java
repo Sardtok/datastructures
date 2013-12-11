@@ -451,12 +451,12 @@ public class LinkedListTest {
         LinkedList<Integer> instance = new LinkedList<>();
         Integer[] res = new Integer[5];
         
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < res.length; i++) {
             instance.add(i);
-            res[i] = Integer.valueOf(i);
+            res[i] = i;
         }
         
-        Assert.assertArrayEquals(res, instance.toArray());
+        assertArrayEquals(res, instance.toArray());
     }
 
     /**
@@ -465,13 +465,16 @@ public class LinkedListTest {
     @Test
     public void testToArrayTyped() {
         System.out.println("toArray");
-        Integer[] a = null;
-        LinkedList instance = new LinkedList();
-        Object[] expResult = null;
-        Object[] result = instance.toArray(a);
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        LinkedList<Integer> instance = new LinkedList();
+        Integer[] res = new Integer[5];
+        
+        for (int i = 0; i < res.length; i++) {
+            instance.add(i);
+            res[i] = i;
+        }
+        
+        assertArrayEquals(res, instance.toArray(new Integer[res.length]));
+        assertArrayEquals(res, instance.toArray(new Integer[0]));
     }
 
     /**
