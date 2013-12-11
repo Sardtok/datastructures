@@ -254,7 +254,15 @@ public class LinkedList<E> implements List<E> {
      * @param c The collection whose elements should be added to the list.
      */
     public boolean addAll(Collection<? extends E> c) {
-        throw new UnsupportedOperationException("Coming soon to a data structure near you!");
+        if (c.isEmpty()) {
+            return false;
+        }
+        
+        for (E e : c) {
+            add(e);
+        }
+        
+        return true;
     }
 
     /**
@@ -265,7 +273,17 @@ public class LinkedList<E> implements List<E> {
      * @param c The collection whose elements should be addd to the list.
      */
     public boolean addAll(int index, Collection<? extends E> c) {
-        throw new UnsupportedOperationException("Coming soon to a data structure near you!");
+        if (c.isEmpty()) {
+            return false;
+        }
+        
+        ListIterator<E> it = listIterator(index);
+        
+        for (E e : c) {
+            it.add(e);
+        }
+        
+        return true;
     }
 
     /**
@@ -663,6 +681,7 @@ public class LinkedList<E> implements List<E> {
                 first = n;
             }
             
+            current = null;
             previous = n;
             nextIndex++;
             prevIndex++;
