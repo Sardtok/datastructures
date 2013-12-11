@@ -189,6 +189,9 @@ public class LinkedList<E> implements List<E> {
      * @return The element at the specified index.
      */
     private Node getNode(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
         NodeIterator it = new NodeIterator(index);
 
         return it.next();
@@ -286,7 +289,9 @@ public class LinkedList<E> implements List<E> {
      * Removes all elements from the list.
      */
     public void clear() {
-        throw new UnsupportedOperationException("Coming soon to a data structure near you!");
+        first = null;
+        last = null;
+        size = 0;
     }
 
     /**
