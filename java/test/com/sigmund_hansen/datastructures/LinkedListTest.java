@@ -475,12 +475,27 @@ public class LinkedListTest {
     @Test
     public void testIterator() {
         System.out.println("iterator");
-        LinkedList instance = new LinkedList();
-        Iterator expResult = null;
-        Iterator result = instance.iterator();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        LinkedList<Integer> instance = new LinkedList<>();
+        for (int i = 0; i < 10; i++) {
+            instance.add(i);
+        }
+        
+        Iterator<Integer> it = instance.iterator();
+        for (int i = 0; i < 10; i++) {
+            assertTrue(it.hasNext());
+            assertEquals(Integer.valueOf(i), it.next());
+        }
+        
+        it = instance.iterator();
+        it.next();
+        while (instance.size() > 2) {
+            it.next();
+            it.remove();
+        }
+        
+        it = instance.iterator();
+        assertEquals(Integer.valueOf(0), it.next());
+        assertEquals(Integer.valueOf(9), it.next());
     }
 
     /**
