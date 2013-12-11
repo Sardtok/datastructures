@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.ListIterator;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -177,12 +178,13 @@ public class LinkedListTest {
             assertEquals("The last item in the list should be the previously added item.",
                          Integer.valueOf(i), instance.get(i));
         }
-        
+
         try {
             instance.add(null);
             fail("Null elements should not be allowed to be added.");
-        } catch (NullPointerException npe) {}
-        
+        } catch (NullPointerException npe) {
+        }
+
     }
 
     /**
@@ -195,7 +197,7 @@ public class LinkedListTest {
         for (int i = 0; i < 5; i++) {
             instance.add(i + 5);
         }
-        
+
         for (int i = 0; i < 5; i++) {
             assertEquals("The position of 5 should move forward in the list as items are added before it.",
                          Integer.valueOf(5), instance.get(i));
@@ -218,7 +220,7 @@ public class LinkedListTest {
         for (int i = 0; i < 10; i++) {
             c.add(i);
         }
-        
+
         instance.addAll(c);
         assertEquals("After adding a collection to the list, they should have the same size.",
                      c.size(), instance.size());
@@ -234,19 +236,19 @@ public class LinkedListTest {
         System.out.println("addAll");
         Collection<Integer> c = new ArrayList<>();
         LinkedList<Integer> instance = new LinkedList<>();
-        
+
         instance.add(0);
         instance.add(1);
         instance.add(2);
-        
+
         c.add(3);
         c.add(4);
         c.add(5);
-        
+
         instance.add(6);
         instance.add(7);
         instance.add(8);
-        
+
         assertTrue(instance.addAll(3, c));
         assertEquals(9, instance.size());
         assertTrue(instance.containsAll(c));
@@ -281,7 +283,7 @@ public class LinkedListTest {
         for (int i = 0; i < 5; i++) {
             instance.add(i);
         }
-        
+
         assertEquals("", 5, instance.size());
         instance.clear();
         assertEquals("", 0, instance.size());
@@ -353,7 +355,7 @@ public class LinkedListTest {
                 c.add(i);
             }
         }
-        
+
         assertTrue("Removing all items of a collection from a list, should result in a change if any exist.",
                    instance.removeAll(c));
         assertFalse("Removing the same items twice, should not result in a change.",
@@ -378,7 +380,7 @@ public class LinkedListTest {
                 c.add(i);
             }
         }
-        
+
         assertTrue("If a list contains other items than those retained, retaining should lead to a change.",
                    instance.retainAll(c));
         assertFalse("If a list only contains the items of a collection being retained, no change should occur.",
@@ -416,7 +418,7 @@ public class LinkedListTest {
             instance.add(i);
             instance.add(i, i);
         }
-        
+
         for (int i = 0; i < 10; i++) {
             assertEquals(i + 10, instance.lastIndexOf(i));
             assertTrue("The first index and last index of an item should be different if they exist mulitple times.",
@@ -444,21 +446,24 @@ public class LinkedListTest {
      * Test of toArray method, of class LinkedList.
      */
     @Test
-    public void testToArray_0args() {
+    public void testToArray() {
         System.out.println("toArray");
-        LinkedList instance = new LinkedList();
-        Object[] expResult = null;
-        Object[] result = instance.toArray();
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        LinkedList<Integer> instance = new LinkedList<>();
+        Integer[] res = new Integer[5];
+        
+        for (int i = 0; i < 5; i++) {
+            instance.add(i);
+            res[i] = Integer.valueOf(i);
+        }
+        
+        Assert.assertArrayEquals(res, instance.toArray());
     }
 
     /**
      * Test of toArray method, of class LinkedList.
      */
     @Test
-    public void testToArray_GenericType() {
+    public void testToArrayTyped() {
         System.out.println("toArray");
         Integer[] a = null;
         LinkedList instance = new LinkedList();
@@ -479,20 +484,20 @@ public class LinkedListTest {
         for (int i = 0; i < 10; i++) {
             instance.add(i);
         }
-        
+
         Iterator<Integer> it = instance.iterator();
         for (int i = 0; i < 10; i++) {
             assertTrue(it.hasNext());
             assertEquals(Integer.valueOf(i), it.next());
         }
-        
+
         it = instance.iterator();
         it.next();
         while (instance.size() > 2) {
             it.next();
             it.remove();
         }
-        
+
         it = instance.iterator();
         assertEquals(Integer.valueOf(0), it.next());
         assertEquals(Integer.valueOf(9), it.next());
@@ -508,7 +513,7 @@ public class LinkedListTest {
         for (int i = 0; i < 10; i++) {
             instance.add(i);
         }
-        
+
         ListIterator<Integer> it = instance.listIterator();
         for (int i = 0; i < 10; i++) {
             assertTrue(it.hasNext());
@@ -516,14 +521,14 @@ public class LinkedListTest {
             assertEquals(i - 1, it.previousIndex());
             assertEquals(Integer.valueOf(i), it.next());
         }
-        
+
         for (int i = 9; i >= 0; i--) {
             assertTrue(it.hasPrevious());
             assertEquals(i + 1, it.nextIndex());
             assertEquals(i, it.previousIndex());
             assertEquals(Integer.valueOf(i), it.previous());
         }
-        
+
         it.set(11);
         assertEquals(Integer.valueOf(11), it.next());
         it.add(12);
@@ -542,23 +547,23 @@ public class LinkedListTest {
         for (int i = 0; i < 10; i++) {
             instance.add(i);
         }
-        
+
         ListIterator<Integer> it = instance.listIterator(instance.size());
-        
+
         for (int i = 9; i >= 0; i--) {
             assertTrue(it.hasPrevious());
             assertEquals(i + 1, it.nextIndex());
             assertEquals(i, it.previousIndex());
             assertEquals(Integer.valueOf(i), it.previous());
         }
-        
+
         for (int i = 0; i < 10; i++) {
             assertTrue(it.hasNext());
             assertEquals(i, it.nextIndex());
             assertEquals(i - 1, it.previousIndex());
             assertEquals(Integer.valueOf(i), it.next());
         }
-        
+
         it.set(11);
         assertEquals(Integer.valueOf(11), it.previous());
         it.add(12);
