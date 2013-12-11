@@ -381,13 +381,12 @@ public class LinkedList<E> implements List<E> {
      *         not contain the item.
      */
     public int indexOf(Object o) {
-        int i = 0;
-        for (E e : this) {
-            if (o.equals(e)) {
-                return i;
+        ListIterator<E> it = listIterator();
+        
+        while (it.hasNext()) {
+            if (o.equals(it.next())) {
+                return it.previousIndex();
             }
-            
-            i++;
         }
         
         return -1;
@@ -401,7 +400,15 @@ public class LinkedList<E> implements List<E> {
      *         contain the item.
      */
     public int lastIndexOf(Object o) {
-        throw new UnsupportedOperationException("Coming soon to a data structure near you!");
+        ListIterator<E> it = listIterator(size);
+        
+        while (it.hasPrevious()) {
+            if (o.equals(it.previous())) {
+                return it.nextIndex();
+            }
+        }
+        
+        return -1;
     }
 
     /**
@@ -520,7 +527,7 @@ public class LinkedList<E> implements List<E> {
         NodeIterator(int index) {
             int i = 0;
 
-            if (index < 0 || (index > 0 && index >= size)) {
+            if (index < 0 || index > size) {
                 throw new IndexOutOfBoundsException();
             }
 
