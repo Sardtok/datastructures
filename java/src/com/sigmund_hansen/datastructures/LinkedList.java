@@ -662,6 +662,14 @@ public class LinkedList<E> implements List<E> {
                 last = n;
             }
             
+            if (current == next) {
+                next = n;
+            }
+            
+            if (current == previous) {
+                previous = n;
+            }
+            
             current = n;
         }
         
