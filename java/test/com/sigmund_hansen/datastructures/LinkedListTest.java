@@ -538,12 +538,32 @@ public class LinkedListTest {
     @Test
     public void testListIteratorIndexed() {
         System.out.println("listIterator");
-        int startIndex = 0;
-        LinkedList instance = new LinkedList();
-        ListIterator expResult = null;
-        ListIterator result = instance.listIterator(startIndex);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        LinkedList<Integer> instance = new LinkedList<>();
+        for (int i = 0; i < 10; i++) {
+            instance.add(i);
+        }
+        
+        ListIterator<Integer> it = instance.listIterator(instance.size());
+        
+        for (int i = 9; i >= 0; i--) {
+            assertTrue(it.hasPrevious());
+            assertEquals(i + 1, it.nextIndex());
+            assertEquals(i, it.previousIndex());
+            assertEquals(Integer.valueOf(i), it.previous());
+        }
+        
+        for (int i = 0; i < 10; i++) {
+            assertTrue(it.hasNext());
+            assertEquals(i, it.nextIndex());
+            assertEquals(i - 1, it.previousIndex());
+            assertEquals(Integer.valueOf(i), it.next());
+        }
+        
+        it.set(11);
+        assertEquals(Integer.valueOf(11), it.previous());
+        it.add(12);
+        assertEquals(9, it.previousIndex());
+        assertEquals(10, it.nextIndex());
+        assertEquals(Integer.valueOf(12), it.previous());
     }
 }
