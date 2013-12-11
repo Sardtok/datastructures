@@ -276,7 +276,10 @@ public class LinkedList<E> implements List<E> {
      * @return The element previously located at that position.
      */
     public E set(int index, E e) {
-        throw new UnsupportedOperationException("Coming soon to a data structure near you!");
+        ListIterator<E> it = listIterator(index);
+        E ret = it.next();
+        it.set(e);
+        return ret;
     }
 
     /**
@@ -496,25 +499,30 @@ public class LinkedList<E> implements List<E> {
                 throw new IndexOutOfBoundsException();
             }
 
-            if (index < size / 2) {
+            if (index <= size / 2) {
                 next = first;
                 while (i < index) {
                     next = next.next;
                     i++;
                 }
+                
+                if (next != null) {
+                    previous = next.previous;
+                }
 
             } else {
-                next = last;
-                i = size - 1;
+                previous = last;
+                i = size;
                 while (i > index) {
-                    next = next.previous;
+                    previous = previous.previous;
                     i--;
+                }
+                
+                if (previous != null) {
+                    next = previous.next;
                 }
             }
 
-            if (next != null) {
-                previous = next.previous;
-            }
             this.nextIndex = index;
             this.prevIndex = index - 1;
         }
@@ -585,8 +593,24 @@ public class LinkedList<E> implements List<E> {
                 throw new IllegalStateException();
             }
 
-            n.previous = previous;
-            n.next = next;
+            n.previous = current.previous;
+            n.next = current.next;
+            
+            if (current.previous != null) {
+                current.previous.next = n;
+            }
+            
+            if (current.next != null) {
+                current.next.previous = n;
+            }
+
+            if (current == first) {
+                first = n;
+            }
+            
+            if (current == last) {
+                last = n;
+            }
             
             current = n;
         }
