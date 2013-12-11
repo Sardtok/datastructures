@@ -232,14 +232,27 @@ public class LinkedListTest {
     @Test
     public void testAddAllIndexed() {
         System.out.println("addAll");
-        int index = 0;
         Collection<Integer> c = new ArrayList<>();
         LinkedList<Integer> instance = new LinkedList<>();
-        boolean expResult = false;
-        boolean result = instance.addAll(index, c);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        instance.add(0);
+        instance.add(1);
+        instance.add(2);
+        
+        c.add(3);
+        c.add(4);
+        c.add(5);
+        
+        instance.add(6);
+        instance.add(7);
+        instance.add(8);
+        
+        assertTrue(instance.addAll(3, c));
+        assertEquals(9, instance.size());
+        assertTrue(instance.containsAll(c));
+        for (int i = 0; i < 9; i++) {
+            assertEquals(i, instance.indexOf(i));
+        }
     }
 
     /**
