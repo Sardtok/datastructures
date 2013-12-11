@@ -18,6 +18,7 @@
 
 package com.sigmund_hansen.datastructures;
 
+import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -470,7 +471,21 @@ public class LinkedList<E> implements List<E> {
      *         array of the same type.
      */
     public <T> T[] toArray(T[] a) {
-        throw new UnsupportedOperationException("Coming soon to a data structure near you!");
+        if (a.length > size) {
+            a[size] = null;
+        }
+        
+        if (a.length < size) {
+            a = (T[]) Array.newInstance(a.getClass().getComponentType(), size);
+        }
+        
+        int i = 0;
+        
+        for (E e : this) {
+            a[i++] = (T) e;
+        }
+        
+        return a;
     }
 
     /**
