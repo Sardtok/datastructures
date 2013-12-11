@@ -384,13 +384,12 @@ public class LinkedListTest {
     @Test
     public void testIndexOf() {
         System.out.println("indexOf");
-        Object o = null;
-        LinkedList instance = new LinkedList();
-        int expResult = 0;
-        int result = instance.indexOf(o);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        LinkedList<Integer> instance = new LinkedList<>();
+        for (int i = 0; i < 10; i++) {
+            instance.add(i);
+            assertEquals("An item should be found at the index it is inserted.",
+                         i, instance.indexOf(i));
+        }
     }
 
     /**
@@ -399,13 +398,17 @@ public class LinkedListTest {
     @Test
     public void testLastIndexOf() {
         System.out.println("lastIndexOf");
-        Object o = null;
-        LinkedList instance = new LinkedList();
-        int expResult = 0;
-        int result = instance.lastIndexOf(o);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        LinkedList<Integer> instance = new LinkedList<>();
+        for (int i = 0; i < 10; i++) {
+            instance.add(i);
+            instance.add(i, i);
+        }
+        
+        for (int i = 0; i < 10; i++) {
+            assertEquals(i + 10, instance.lastIndexOf(i));
+            assertTrue("The first index and last index of an item should be different if they exist mulitple times.",
+                       instance.indexOf(i) != instance.lastIndexOf(i));
+        }
     }
 
     /**
