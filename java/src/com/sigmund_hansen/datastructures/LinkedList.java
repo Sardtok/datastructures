@@ -338,7 +338,17 @@ public class LinkedList<E> implements List<E> {
      *         operaton (i.e. any element was removed).
      */
     public boolean removeAll(Collection<?> c) {
-        throw new UnsupportedOperationException("Coming soon to a data structure near you!");
+        Iterator<E> it = iterator();
+        boolean removedItems = false;
+        
+        while (it.hasNext()) {
+            if (c.contains(it.next())) {
+                it.remove();
+                removedItems = true;
+            }
+        }
+        
+        return removedItems;
     }
 
     /**
@@ -350,7 +360,17 @@ public class LinkedList<E> implements List<E> {
      *         operation (i.e. any element was removed).
      */
     public boolean retainAll(Collection<?> c) {
-        throw new UnsupportedOperationException("Coming soon to a data structure near you!");
+        Iterator<E> it = iterator();
+        boolean removedItems = false;
+        
+        while (it.hasNext()) {
+            if (!c.contains(it.next())) {
+                it.remove();
+                removedItems = true;
+            }
+        }
+        
+        return removedItems;
     }
 
     /**
