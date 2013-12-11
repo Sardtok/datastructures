@@ -332,13 +332,23 @@ public class LinkedListTest {
     @Test
     public void testRemoveAll() {
         System.out.println("removeAll");
-        Collection<?> c = null;
-        LinkedList instance = new LinkedList();
-        boolean expResult = false;
-        boolean result = instance.removeAll(c);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Collection<Integer> c = new ArrayList<>();
+        LinkedList<Integer> instance = new LinkedList<>();
+        for (int i = 0; i < 10; i++) {
+            instance.add(i % 5);
+            if (i % 2 == 0) {
+                c.add(i);
+            }
+        }
+        
+        assertTrue("Removing all items of a collection from a list, should result in a change if any exist.",
+                   instance.removeAll(c));
+        assertFalse("Removing the same items twice, should not result in a change.",
+                    instance.removeAll(c));
+        for (int i : c) {
+            assertFalse("No items from the collection that was removed from the list, should be in the list.",
+                        instance.contains(i));
+        }
     }
 
     /**
@@ -347,13 +357,25 @@ public class LinkedListTest {
     @Test
     public void testRetainAll() {
         System.out.println("retainAll");
-        Collection<?> c = null;
-        LinkedList instance = new LinkedList();
-        boolean expResult = false;
-        boolean result = instance.retainAll(c);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Collection<Integer> c = new ArrayList<>();
+        LinkedList<Integer> instance = new LinkedList<>();
+        for (int i = 0; i < 10; i++) {
+            instance.add(i % 5);
+            if (i < 5 && i % 2 == 0) {
+                c.add(i);
+            }
+        }
+        
+        assertTrue("If a list contains other items than those retained, retaining should lead to a change.",
+                   instance.retainAll(c));
+        assertFalse("If a list only contains the items of a collection being retained, no change should occur.",
+                    instance.retainAll(c));
+        for (int i : c) {
+            assertTrue("Unless the collection being retained contains items not originally in the list, all those items should be in the list.",
+                       instance.contains(i));
+            assertFalse("No other items should be in the list after retaining a collection.",
+                        instance.contains(i - 1));
+        }
     }
 
     /**
