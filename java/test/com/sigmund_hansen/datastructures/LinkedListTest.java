@@ -317,23 +317,23 @@ public class LinkedListTest {
     @Test
     public void testRemoveIndexed() {
         System.out.println("remove");
-        LinkedList<Float> instance = new LinkedList<>();
-        for (float i = 0f; i < 10f; i++) {
+        LinkedList<Integer> instance = new LinkedList<>();
+        for (int i = 0; i < 10; i++) {
             instance.add(i);
         }
 
         int sizeBefore = instance.size();
         assertTrue("3f should be in the list",
-                   instance.contains(3f));
-        assertEquals("Index of 4f should be 4 before removing 3f.",
-                     4, instance.indexOf(4f));
-        instance.remove(3);
+                   instance.contains(3));
+        assertEquals("Index of 4f should be 4 before removing 3.",
+                     4, instance.indexOf(4));
+        instance.remove(Integer.valueOf(3));
         assertEquals("The size of a list should change after removing an object",
                      sizeBefore - 1, instance.size());
         assertFalse("An object should not exist in a list after removal.",
-                    instance.contains(3.0f));
+                    instance.contains(3));
         assertEquals("The index of 4f should be 3 after removing the third item.",
-                     3, instance.indexOf(4f));
+                     3, instance.indexOf(4));
     }
 
     /**
@@ -342,20 +342,20 @@ public class LinkedListTest {
     @Test
     public void testRemoveObject() {
         System.out.println("remove");
-        LinkedList<Float> instance = new LinkedList<>();
-        for (float i = 0.0f; i < 10f; i++) {
+        LinkedList<Integer> instance = new LinkedList<>();
+        for (int i = 0; i < 10; i++) {
             instance.add(i);
         }
 
         int sizeBefore = instance.size();
         assertTrue("Removing an object that exists in a list, should result in a change.",
-                   instance.remove(3.0f));
+                   instance.remove(Integer.valueOf(3)));
         assertFalse("Removing the same object twice, should not result in a change.",
-                    instance.remove(3.0f));
+                    instance.remove(Integer.valueOf(3)));
         assertEquals("The size of a list should change after removing an object",
                      sizeBefore - 1, instance.size());
         assertFalse("An object should not exist in a list after removal.",
-                    instance.contains(3.0f));
+                    instance.contains(3));
     }
 
     /**
