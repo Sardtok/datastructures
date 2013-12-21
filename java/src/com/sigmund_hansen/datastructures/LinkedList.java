@@ -118,9 +118,14 @@ public class LinkedList<E> implements List<E> {
      * @param o The object to search for.
      * @return <code>true</code> if the object exists in the list.
      */
+    @Override
     public boolean contains(Object o) {
+        if (o == null) {
+            return false;
+        }
+        
         for (E e : this) {
-            if (e.equals(o)) {
+            if (o.equals(e)) {
                 return true;
             }
         }
@@ -140,6 +145,7 @@ public class LinkedList<E> implements List<E> {
      * @param c The collection whose elements are to be searched for.
      * @return <code>true</code> if all of the elements exist in the list.
      */
+    @Override
     public boolean containsAll(Collection<?> c) {
         for (Object o : c) {
             if (!contains(o)) {
@@ -167,6 +173,7 @@ public class LinkedList<E> implements List<E> {
      *         or higher than or equal to the size of the list.
      * @return The element at the specified index.
      */
+    @Override
     public E get(int index) {
         return getNode(index).element;
     }
@@ -205,6 +212,7 @@ public class LinkedList<E> implements List<E> {
      *
      * @return The number of elements in the list.
      */
+    @Override
     public int size() {
         return size;
     }
@@ -214,6 +222,7 @@ public class LinkedList<E> implements List<E> {
      *
      * @return <code>true</code> if the list does not contain any elements.
      */
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }
@@ -224,6 +233,7 @@ public class LinkedList<E> implements List<E> {
      * @param e The element to add to the list.
      * @return <code>true</code> if the element was added (i.e. always).
      */
+    @Override
     public boolean add(E e) {
         if (e == null) {
             throw new NullPointerException("Null elements are not supported.");
@@ -246,6 +256,7 @@ public class LinkedList<E> implements List<E> {
      * @throws IndexOutOfBoundsException if the index is negative
      *         or higher than the size of the list.
      */
+    @Override
     public void add(int index, E e) {
         ListIterator<E> it = listIterator(index);
         it.add(e);
@@ -256,6 +267,7 @@ public class LinkedList<E> implements List<E> {
      *
      * @param c The collection whose elements should be added to the list.
      */
+    @Override
     public boolean addAll(Collection<? extends E> c) {
         if (c.isEmpty()) {
             return false;
@@ -275,6 +287,7 @@ public class LinkedList<E> implements List<E> {
      * @param index The index at which to insert the collection's elements.
      * @param c The collection whose elements should be addd to the list.
      */
+    @Override
     public boolean addAll(int index, Collection<? extends E> c) {
         if (c.isEmpty()) {
             return false;
@@ -299,6 +312,7 @@ public class LinkedList<E> implements List<E> {
      *         or higher than or equal to the size of the list.
      * @return The element previously located at that position.
      */
+    @Override
     public E set(int index, E e) {
         ListIterator<E> it = listIterator(index);
         E ret = it.next();
@@ -309,6 +323,7 @@ public class LinkedList<E> implements List<E> {
     /**
      * Removes all elements from the list.
      */
+    @Override
     public void clear() {
         first = null;
         last = null;
@@ -323,6 +338,7 @@ public class LinkedList<E> implements List<E> {
      *         or higher than or equal to the size of the list.
      * @return The element that was removed.
      */
+    @Override
     public E remove(int index) {
         Iterator<E> it = listIterator(index);
         E ret = it.next();
@@ -338,6 +354,7 @@ public class LinkedList<E> implements List<E> {
      * @return <code>true</code> if the list changed due to the
      *         operation (i.e. the element was found and removed).
      */
+    @Override
     public boolean remove(Object o) {
         Iterator<E> it = iterator();
         while (it.hasNext()) {
@@ -358,6 +375,7 @@ public class LinkedList<E> implements List<E> {
      * @return <code>true</code> if the list changed due to the
      *         operaton (i.e. any element was removed).
      */
+    @Override
     public boolean removeAll(Collection<?> c) {
         Iterator<E> it = iterator();
         boolean removedItems = false;
@@ -380,6 +398,7 @@ public class LinkedList<E> implements List<E> {
      * @return <code>true</code> if the list changed due to the
      *         operation (i.e. any element was removed).
      */
+    @Override
     public boolean retainAll(Collection<?> c) {
         Iterator<E> it = iterator();
         boolean removedItems = false;
@@ -401,6 +420,7 @@ public class LinkedList<E> implements List<E> {
      * @return The first index of the object or -1 if the list does
      *         not contain the item.
      */
+    @Override
     public int indexOf(Object o) {
         ListIterator<E> it = listIterator();
         
@@ -420,6 +440,7 @@ public class LinkedList<E> implements List<E> {
      * @return The last index of the object or -1 if the list does not
      *         contain the item.
      */
+    @Override
     public int lastIndexOf(Object o) {
         ListIterator<E> it = listIterator(size);
         
@@ -443,6 +464,7 @@ public class LinkedList<E> implements List<E> {
      *         ending index.
      * @return A view of a subset of this list.
      */
+    @Override
     public List<E> subList(int from, int to) {
         throw new UnsupportedOperationException("Coming soon to a data structure near you!");
     }
@@ -452,6 +474,7 @@ public class LinkedList<E> implements List<E> {
      *
      * @return An array containing this list's items.
      */
+    @Override
     public Object[] toArray() {
         Object[] ret = new Object[size];
         int i = 0;
@@ -472,6 +495,7 @@ public class LinkedList<E> implements List<E> {
      * @return The array that was passed, if it's big enough, or a new
      *         array of the same type.
      */
+    @Override
     public <T> T[] toArray(T[] a) {
         if (a.length > size) {
             a[size] = null;
@@ -496,6 +520,7 @@ public class LinkedList<E> implements List<E> {
      * 
      * @return An iterator iterating from start to finish.
      */
+    @Override
     public Iterator<E> iterator() {
         return listIterator(0);
     }
@@ -506,6 +531,7 @@ public class LinkedList<E> implements List<E> {
      *
      * @return A list iterator starting at the first element.
      */
+    @Override
     public ListIterator<E> listIterator() {
         return listIterator(0);
     }
@@ -518,42 +544,52 @@ public class LinkedList<E> implements List<E> {
      *                   calling next.
      * @return A list iterator starting at the specified position.
      */
+    @Override
     public ListIterator<E> listIterator(final int startIndex) {
         return new ListIterator<E>() {
             NodeIterator it = new NodeIterator(startIndex);
 
+            @Override
             public boolean hasNext() {
                 return it.hasNext();
             }
             
+            @Override
             public boolean hasPrevious() {
                 return it.hasPrevious();
             }
             
+            @Override
             public int nextIndex() {
                 return it.nextIndex();
             }
             
+            @Override
             public int previousIndex() {
                 return it.previousIndex();
             }
 
+            @Override
             public E next() {
                 return it.next().element;
             }
             
+            @Override
             public E previous() {
                 return it.previous().element;
             }
             
+            @Override
             public void remove() {
                 it.remove();
             }
             
+            @Override
             public void set(E e) {
                 it.set(new Node(e));
             }
             
+            @Override
             public void add(E e) {
                 it.add(new Node(e));
             }
@@ -602,22 +638,27 @@ public class LinkedList<E> implements List<E> {
             this.prevIndex = index - 1;
         }
 
+        @Override
         public boolean hasNext() {
             return nextIndex < size;
         }
 
+        @Override
         public boolean hasPrevious() {
             return prevIndex >= 0 && size > 0;
         }
 
+        @Override
         public int nextIndex() {
             return nextIndex;
         }
 
+        @Override
         public int previousIndex() {
             return prevIndex;
         }
 
+        @Override
         public Node next() {
             if (!hasNext()) {
                 throw new NoSuchElementException();
@@ -631,6 +672,7 @@ public class LinkedList<E> implements List<E> {
             return current;
         }
 
+        @Override
         public Node previous() {
             if (!hasPrevious()) {
                 throw new NoSuchElementException();
@@ -644,6 +686,7 @@ public class LinkedList<E> implements List<E> {
             return current;
         }
 
+        @Override
         public void remove() {
             if (current == null) {
                 throw new IllegalStateException();
@@ -663,6 +706,7 @@ public class LinkedList<E> implements List<E> {
             current = null;
         }
 
+        @Override
         public void set(Node n) {
             if (current == null) {
                 throw new IllegalStateException();
@@ -698,6 +742,7 @@ public class LinkedList<E> implements List<E> {
             current = n;
         }
         
+        @Override
         public void add(Node n) {
             n.next = next;
             n.previous = previous;
