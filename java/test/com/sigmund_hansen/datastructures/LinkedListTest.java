@@ -39,24 +39,12 @@ import static org.junit.Assert.*;
  * @author Sigmund Hansen
  */
 public class LinkedListTest {
-
-    public LinkedListTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
+    
+    private LinkedList<Integer> instance;
 
     @Before
     public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
+        instance = new LinkedList<>();
     }
 
     /**
@@ -65,7 +53,6 @@ public class LinkedListTest {
     @Test
     public void testContains() {
         System.out.println("contains");
-        LinkedList<Integer> instance = new LinkedList<>();
         assertFalse("Contains on empty list should return false.",
                     instance.contains(5));
 
@@ -97,7 +84,6 @@ public class LinkedListTest {
     public void testContainsAll() {
         System.out.println("containsAll");
         Collection<Integer> c = new ArrayList<>();
-        LinkedList<Integer> instance = new LinkedList<>();
         for (int i = 0; i < 10; i++) {
             instance.add(i);
             c.add(i * 2);
@@ -118,7 +104,6 @@ public class LinkedListTest {
     @Test
     public void testGet() {
         System.out.println("get");
-        LinkedList<Integer> instance = new LinkedList<>();
         for (int i = 0; i <= 10; i++) {
             instance.add(i);
         }
@@ -147,7 +132,6 @@ public class LinkedListTest {
     @Test
     public void testSize() {
         System.out.println("size");
-        LinkedList<Integer> instance = new LinkedList<>();
         assertEquals("Empty lists should have size 0.",
                      0, instance.size());
 
@@ -170,7 +154,6 @@ public class LinkedListTest {
     @Test
     public void testIsEmpty() {
         System.out.println("isEmpty");
-        LinkedList<Integer> instance = new LinkedList<>();
         assertTrue("isEmpty should return true for an empty list.",
                    instance.isEmpty());
 
@@ -185,7 +168,6 @@ public class LinkedListTest {
     @Test
     public void testAdd() {
         System.out.println("add");
-        LinkedList<Integer> instance = new LinkedList<>();
         for (int i = 0; i < 10; i++) {
             assertTrue("Adding an element should return true.", instance.add(i));
             assertEquals("Size should be equal to the number of items added.",
@@ -210,7 +192,6 @@ public class LinkedListTest {
     @Test
     public void testAddIndexed() {
         System.out.println("add indexed");
-        LinkedList<Integer> instance = new LinkedList<>();
         for (int i = 0; i < 5; i++) {
             instance.add(i + 5);
         }
@@ -233,7 +214,6 @@ public class LinkedListTest {
     public void testAddAll() {
         System.out.println("addAll");
         Collection<Integer> c = new ArrayList<>();
-        LinkedList<Integer> instance = new LinkedList<>();
         for (int i = 0; i < 10; i++) {
             c.add(i);
         }
@@ -252,7 +232,6 @@ public class LinkedListTest {
     public void testAddAllIndexed() {
         System.out.println("addAll");
         Collection<Integer> c = new ArrayList<>();
-        LinkedList<Integer> instance = new LinkedList<>();
 
         instance.add(0);
         instance.add(1);
@@ -280,7 +259,6 @@ public class LinkedListTest {
     @Test
     public void testSet() {
         System.out.println("set");
-        LinkedList<Integer> instance = new LinkedList<>();
         for (int i = 0; i < 5; i++) {
             instance.add(i);
             assertEquals("Exchanging an item should return the item previously located at that position",
@@ -296,7 +274,6 @@ public class LinkedListTest {
     @Test
     public void testClear() {
         System.out.println("clear");
-        LinkedList<Integer> instance = new LinkedList<>();
         for (int i = 0; i < 5; i++) {
             instance.add(i);
         }
@@ -317,7 +294,6 @@ public class LinkedListTest {
     @Test
     public void testRemoveIndexed() {
         System.out.println("remove");
-        LinkedList<Integer> instance = new LinkedList<>();
         for (int i = 0; i < 10; i++) {
             instance.add(i);
         }
@@ -342,7 +318,6 @@ public class LinkedListTest {
     @Test
     public void testRemoveObject() {
         System.out.println("remove");
-        LinkedList<Integer> instance = new LinkedList<>();
         for (int i = 0; i < 10; i++) {
             instance.add(i);
         }
@@ -365,7 +340,6 @@ public class LinkedListTest {
     public void testRemoveAll() {
         System.out.println("removeAll");
         Collection<Integer> c = new ArrayList<>();
-        LinkedList<Integer> instance = new LinkedList<>();
         for (int i = 0; i < 10; i++) {
             instance.add(i % 5);
             if (i % 2 == 0) {
@@ -390,7 +364,6 @@ public class LinkedListTest {
     public void testRetainAll() {
         System.out.println("retainAll");
         Collection<Integer> c = new ArrayList<>();
-        LinkedList<Integer> instance = new LinkedList<>();
         for (int i = 0; i < 10; i++) {
             instance.add(i % 5);
             if (i < 5 && i % 2 == 0) {
@@ -416,7 +389,6 @@ public class LinkedListTest {
     @Test
     public void testIndexOf() {
         System.out.println("indexOf");
-        LinkedList<Integer> instance = new LinkedList<>();
         for (int i = 0; i < 10; i++) {
             instance.add(i);
             assertEquals("An item should be found at the index it is inserted.",
@@ -430,7 +402,6 @@ public class LinkedListTest {
     @Test
     public void testLastIndexOf() {
         System.out.println("lastIndexOf");
-        LinkedList<Integer> instance = new LinkedList<>();
         for (int i = 0; i < 10; i++) {
             instance.add(i);
             instance.add(i, i);
@@ -451,10 +422,7 @@ public class LinkedListTest {
         System.out.println("subList");
         int from = 0;
         int to = 0;
-        LinkedList instance = new LinkedList();
-        List expResult = null;
         List result = instance.subList(from, to);
-        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -465,7 +433,6 @@ public class LinkedListTest {
     @Test
     public void testToArray() {
         System.out.println("toArray");
-        LinkedList<Integer> instance = new LinkedList<>();
         Integer[] res = new Integer[5];
         
         for (int i = 0; i < res.length; i++) {
@@ -482,7 +449,6 @@ public class LinkedListTest {
     @Test
     public void testToArrayTyped() {
         System.out.println("toArray");
-        LinkedList<Integer> instance = new LinkedList();
         Integer[] res = new Integer[5];
         
         for (int i = 0; i < res.length; i++) {
@@ -500,7 +466,6 @@ public class LinkedListTest {
     @Test
     public void testIterator() {
         System.out.println("iterator");
-        LinkedList<Integer> instance = new LinkedList<>();
         for (int i = 0; i < 10; i++) {
             instance.add(i);
         }
@@ -529,7 +494,6 @@ public class LinkedListTest {
     @Test
     public void testListIterator() {
         System.out.println("listIterator");
-        LinkedList<Integer> instance = new LinkedList<>();
         for (int i = 0; i < 10; i++) {
             instance.add(i);
         }
@@ -563,7 +527,6 @@ public class LinkedListTest {
     @Test
     public void testListIteratorIndexed() {
         System.out.println("listIterator");
-        LinkedList<Integer> instance = new LinkedList<>();
         for (int i = 0; i < 10; i++) {
             instance.add(i);
         }
