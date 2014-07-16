@@ -8,6 +8,7 @@ structures in all languages I choose to practice.
 Planned data structures are:
 
 - Linked lists
+- Object pool
 - Binary search trees
   - Unbalanced
   - AVL trees
@@ -42,6 +43,11 @@ time. Implementations may vary depending on the features of a
 language. For instance I will try to ensure Scala implementations are
 immutable to fit the functional paradigm, while a Java implementation
 will almost certainly be mutable.
+
+Although the object pool is not technically a data structure,
+but a design pattern, there aren't that many ways to efficiently implement
+object pools. As such, I've chosen to simply add it as a data structure,
+because it is very useful for saving on resources (both CPU time and memory).
 
 # License
 
