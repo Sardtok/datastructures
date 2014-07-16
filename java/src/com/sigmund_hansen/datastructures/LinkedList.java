@@ -22,6 +22,7 @@ package com.sigmund_hansen.datastructures;
 
 import java.lang.reflect.Array;
 import java.util.Collection;
+import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -31,8 +32,9 @@ import java.util.NoSuchElementException;
  * A generic doubly linked list.
  * 
  * @author Sigmund Hansen
+ * @param <E> The type of elements that will be stored in the list.
  */
-public class LinkedList<E> implements List<E> {
+public class LinkedList<E> implements List<E>, Deque<E> {
 
     /**
      * A node in the list.
@@ -177,6 +179,41 @@ public class LinkedList<E> implements List<E> {
     public E get(int index) {
         return getNode(index).element;
     }
+    
+    @Override
+    public E getFirst() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public E pop() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public E getLast() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public E peekFirst() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public E peekLast() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public E element() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public E peek() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     /**
      * Gets the node at the specified position.
@@ -248,6 +285,65 @@ public class LinkedList<E> implements List<E> {
         return true;
     }
 
+    /**
+     * Adds an element at the beginning of the list.
+     * 
+     * @param e The element to add to the list.
+     */
+    @Override
+    public void addFirst(E e) {
+        if (e == null) {
+            throw new NullPointerException("Null elements are not supported.");
+        }
+        
+        first = new Node(e, first, null);
+        size++;
+        
+        if (last == null) {
+            last = first;
+        }
+    }
+
+    @Override
+    public void push(E e) {
+        addFirst(e);
+    }
+
+    @Override
+    public boolean offerFirst(E e) {
+        if (e == null) {
+            return false;
+        }
+        
+        addFirst(e);
+        return true;
+    }
+
+    /**
+     * Adds an element to the end of the list.
+     * 
+     * @param e The element to add to the list.
+     * @see #add(java.lang.Object) 
+     */
+    @Override
+    public void addLast(E e) {
+        add(e);
+    }
+
+    @Override
+    public boolean offerLast(E e) {
+        if (e == null) {
+            return false;
+        }
+        
+        return add(e);
+    }
+    
+    @Override
+    public boolean offer(E e) {
+        return offerLast(e);
+    }
+    
     /**
      * Adds an element at the specified position.
      *
@@ -367,6 +463,46 @@ public class LinkedList<E> implements List<E> {
         return false;
     }
 
+    @Override
+    public E removeFirst() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public E removeLast() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public E pollFirst() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public E pollLast() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public E poll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean removeFirstOccurrence(Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean removeLastOccurrence(Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public E remove() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     /**
      * Removes all the elements from the given collection from this list.
      *
@@ -594,6 +730,11 @@ public class LinkedList<E> implements List<E> {
                 it.add(new Node(e));
             }
         };
+    }
+
+    @Override
+    public Iterator<E> descendingIterator() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private class NodeIterator implements ListIterator<Node> {
