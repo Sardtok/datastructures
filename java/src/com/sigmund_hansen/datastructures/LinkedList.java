@@ -182,37 +182,53 @@ public class LinkedList<E> implements List<E>, Deque<E> {
     
     @Override
     public E getFirst() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (size == 0) {
+            throw new NoSuchElementException("Cannot get the first element of an empty list.");
+        }
+        
+        return first.element;
     }
 
     @Override
     public E pop() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return removeFirst();
     }
 
     @Override
     public E getLast() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (size == 0) {
+            throw new NoSuchElementException("Cannot get the last element of an empty list.");
+        }
+        
+        return last.element;
     }
 
     @Override
     public E peekFirst() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (size == 0) {
+            return null;
+        }
+        
+        return first.element;
     }
 
     @Override
     public E peekLast() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (size == 0) {
+            return null;
+        }
+        
+        return first.element;
     }
 
     @Override
     public E element() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getFirst();
     }
 
     @Override
     public E peek() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return peekFirst();
     }
 
     /**
