@@ -25,11 +25,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -310,6 +306,18 @@ public class LinkedListTest {
                     instance.contains(3));
         assertEquals("The index of 4f should be 3 after removing the third item.",
                      3, instance.indexOf(4));
+        
+        try {
+            instance.remove(-1);
+            fail("Remove should throw IndexOutOfBoundsException on negative indices.");
+        } catch (IndexOutOfBoundsException ioe) {
+        }
+
+        try {
+            instance.remove(instance.size());
+            fail("Remove should throw IndexOutOfBoundsException on indices >= size.");
+        } catch (IndexOutOfBoundsException ioe) {
+        }
     }
 
     /**

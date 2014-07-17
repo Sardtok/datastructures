@@ -452,6 +452,10 @@ public class LinkedList<E> implements List<E>, Deque<E> {
      */
     @Override
     public E remove(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+        
         Iterator<E> it = listIterator(index);
         E ret = it.next();
         it.remove();
