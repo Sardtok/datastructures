@@ -468,6 +468,10 @@ public class LinkedList<E> implements List<E>, Deque<E> {
      */
     @Override
     public boolean remove(Object o) {
+        if (o == null) {
+            return false;
+        }
+        
         Iterator<E> it = iterator();
         while (it.hasNext()) {
             if (o.equals(it.next())) {
@@ -481,42 +485,82 @@ public class LinkedList<E> implements List<E>, Deque<E> {
 
     @Override
     public E removeFirst() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (isEmpty()) {
+            throw new NoSuchElementException("Cannot remove the first element of an empty list.");
+        }
+        
+        E element = first.element;
+        first.remove();
+        
+        return element;
     }
 
     @Override
     public E removeLast() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (isEmpty()) {
+            throw new NoSuchElementException("Cannot remove the last element of an empty list.");
+        }
+        
+        E element = last.element;
+        last.remove();
+        
+        return element;
     }
 
     @Override
     public E pollFirst() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (isEmpty()) {
+            return null;
+        }
+        
+        E element = first.element;
+        first.remove();
+        
+        return element;
     }
 
     @Override
     public E pollLast() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (isEmpty()) {
+            return null;
+        }
+        
+        E element = last.element;
+        last.remove();
+        
+        return element;
     }
 
     @Override
     public E poll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return pollFirst();
     }
 
     @Override
     public boolean removeFirstOccurrence(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return remove(o);
     }
 
     @Override
     public boolean removeLastOccurrence(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (o == null) {
+            return false;
+        }
+        
+        Iterator<E> it = descendingIterator();
+        while (it.hasNext()) {
+            if (o.equals(it.next())) {
+                it.remove();
+                return true;
+            }
+        }
+        
+        return false;
     }
 
     @Override
     public E remove() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return removeFirst();
     }
     
     /**
