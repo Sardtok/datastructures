@@ -734,7 +734,25 @@ public class LinkedList<E> implements List<E>, Deque<E> {
 
     @Override
     public Iterator<E> descendingIterator() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new Iterator<E>() {
+            
+            NodeIterator it = new NodeIterator(size);
+            
+            @Override
+            public boolean hasNext() {
+                return it.hasPrevious();
+            }
+
+            @Override
+            public E next() {
+                return it.previous().element;
+            }
+            
+            @Override
+            public void remove() {
+                it.remove();
+            }
+        };
     }
 
     private class NodeIterator implements ListIterator<Node> {
